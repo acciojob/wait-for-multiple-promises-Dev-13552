@@ -2,14 +2,14 @@
 const table = document.querySelector("#output")
 
 function randomTime(){
-	return Math.floor(Math.random()*4)
+	return (Math.random() * 2 + 1);
 }
 
 const promise1 = new Promise((res, rej)=>{
 	const time = randomTime()
 	setTimeout(()=>{
 		res(time)
-	}, time)
+	}, time*1000)
 })
 
 
@@ -17,7 +17,7 @@ const promise2 = new Promise((res, rej)=>{
 	const time = randomTime()
 	setTimeout(()=>{
 		res(time)
-	}, time)
+	}, time*1000)
 })
 
 
@@ -25,7 +25,7 @@ const promise3 = new Promise((res, rej)=>{
 	const time = randomTime()
 	setTimeout(()=>{
 		res(time)
-	}, time)
+	}, time*1000)
 })
 
 Promise.all([promise1, promise2,promise3])
@@ -34,18 +34,14 @@ Promise.all([promise1, promise2,promise3])
 	const loading = document.querySelector("#loading")
 	loading.remove()
 	results.forEach((result, index)=>{
-		total += result
 		const row = document.createElement('tr')
-		row.innerHTML = `<td>Promise ${index+1}</td><td>${result}</td>`
+		row.innerHTML = `<td>Promise ${index+1}</td><td>${result.toFixed(3)}</td>`
 		table.appendChild(row)
 	})
-
+		total = Math.max(...results)
 		const row = document.createElement('tr')
-	
-		row.innerHTML = `<td>Total</td><td>${total}</td>`
+		row.innerHTML = `<td>Total</td><td>${total.toFixed(3)}</td>`
 		table.appendChild(row)
 		
-	
-	
 })
 
